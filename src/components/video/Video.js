@@ -1,6 +1,6 @@
 import React from 'react'
 import "./_video.scss";
-import {AiFillEye, AiFillQqCircle} from 'react-icons/ai';
+import {AiFillEye} from 'react-icons/ai';
 
 export default function Video() {
   return (
