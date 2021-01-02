@@ -7,11 +7,12 @@ import {MdNotifications, MdApps} from 'react-icons/md';
 
 
 
-export default function Header() {
+export default function Header({handleToggleSidebar}) {
   return (
     <div className="border border-dark header">
-        <FaBars className="heaer__menu"
+        <FaBars className="header__menu"
         size={26}
+        onClick={()=>handleToggleSidebar()}
         />
         <img src="http://pngimg.com/uploads/youtube/youtube_PNG2.png"
          alt="youtute-logo"
@@ -28,8 +29,6 @@ export default function Header() {
           <img src="/avartar.png" alt="avartar"/>
 
         </div>
-
-      I am header 
     </div>
   )
 }
