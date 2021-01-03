@@ -6,7 +6,8 @@ export const getPopularVideos = () => async dispatch =>{
     dispatch({
       type:HOME_VIDEOS_REQUEST,
     });
-    const res = request("/videos",{
+
+    const {data} = await request("/videos",{
       params:{
           part:"snippet,contentDetails,statistics",
           chart:"mostPopular",
@@ -15,10 +16,21 @@ export const getPopularVideos = () => async dispatch =>{
           pageToken:""
       }
     });
-    console.log(res)
+     console.log(data);
 
-
+    dispatch({
+      type:HOME_VIDEOS_SUCCESS,
+      payload:{
+        videos:data.items,
+        nextPageToken:data.nextPageToken
+      }
+    })
   }catch(e){
+    console.log(e.message);
+    dispatch({
+      type:HOME_VIDEOS_FAIL,
+      payload:e.message
+    })
 
   }
 };

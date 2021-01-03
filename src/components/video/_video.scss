@@ -7,13 +7,16 @@
   font-weight: 500;
   font-size: 0.9rem;
 
+
   cursor: pointer;
 
   &__top {
     margin-bottom: 0.5rem;
+    position: relative;
 
     img {
       width: 100%;
+
     }
 
     span {
@@ -32,6 +35,16 @@
     margin-bottom: 0.1rem;
     color: #fff;
 
+    img {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+
+
     @include line-clamp(1);
     // overflow: hidden;
     // display: -webkit-box;
@@ -42,6 +55,11 @@
   &__details {
     display: flex;
     align-items: center;
+
+    p {
+      margin-bottom: 0;
+      margin-right: 5px;
+    }
   }
 
   &__channel {
@@ -49,16 +67,14 @@
     align-items: center;
     margin: 0.5rem 0;
 
-    img {
-      width: 36px;
-      height: 36px;
+    // img {
+    //   width: 36px;
+    //   height: 36px;
 
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      cursor: pointer;
-
-
-    }
+    //   border-radius: 50%;
+    //   margin-right: 0.5rem;
+    //   cursor: pointer;
+    // }
 
     p {
       margin-bottom: 0;
