@@ -17,6 +17,7 @@ export default function Header({handleToggleSidebar}) {
         <img src="http://pngimg.com/uploads/youtube/youtube_PNG2.png"
          alt="youtute-logo"
         className="header__logo"/>
+        <h1>KIM TUBE</h1>
         <form >
           <input type="text" placeholder="Search"/>
           <button type="submit">

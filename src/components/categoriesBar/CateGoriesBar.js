@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import "./_categoriesBar.scss";
+import {getVideosByCateGories} from '../../redux/actions/video.action';
 
 const keywords = [
   "All",
@@ -14,14 +16,21 @@ export default function CateGoriesBar() {
 
 const [activeElement,setActiveElement] = useState('All');
 
+const dispatch = useDispatch();
+
+
 const handleClick = (value)=>{
   setActiveElement(value)
+  dispatch(getVideosByCateGories(value))
 }
   return (
     <div className="categoriesBar">
       {
         keywords.map((value,i)=>(
-        <span className={activeElement === value ? "active " : ''} onClick={()=>handleClick(value)} key={i} >{value}</span>
+        <span className={activeElement === value ? "active " : ''}
+         onClick={()=>handleClick(value)}
+          key={i} >
+            {value}</span>
         ))
       }
     </div>
