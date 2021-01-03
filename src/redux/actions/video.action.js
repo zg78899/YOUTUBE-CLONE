@@ -3,7 +3,7 @@ import request from '../../axios';
 
 //main page mostPopular Video
 //video
-export const getPopularVideos = () => async dispatch =>{
+export const getPopularVideos = () => async (dispatch,getState) =>{
   try{
     dispatch({
       type:HOME_VIDEOS_REQUEST,
@@ -15,7 +15,7 @@ export const getPopularVideos = () => async dispatch =>{
           chart:"mostPopular",
           regionCode:"KR",
           maxResults:20,
-          pageToken:""
+          pageToken:getState().homeVideos.nextPageToken,
       }
     });
      console.log(data);

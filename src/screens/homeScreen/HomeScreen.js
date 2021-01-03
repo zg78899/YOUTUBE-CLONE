@@ -4,32 +4,52 @@ import CateGoriesBar from '../../components/categoriesBar/CateGoriesBar'
 import Video from '../../components/video/Video'
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPopularVideos } from '../../redux/actions/video.action';
+import { getPopularVideos, getVideosByCateGories } from '../../redux/actions/video.action';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Skeleton from 'react-loading-skeleton';
+import SkeletonVideo from '../../components/skeletons/SkeletonVideo';
 
 export default function HomeScreen() {
+const {videos,activeCategory,loading} = useSelector(state=> state.homeVideos);
 const dispatch = useDispatch();
 
 useEffect(()=>{
 dispatch(getPopularVideos());
 },[dispatch]);
 
+const fetchData  =()=>{
+if(activeCategory === 'All'){
+  dispatch(getPopularVideos());
+}else{
+  dispatch(getVideosByCateGories(activeCategory));
+}
+ }
 
-const {videos} = useSelector(state=> state.homeVideos);
-
-
- 
   return (
     <Container>
       <CateGoriesBar/>
-      <Row>
-        {
-          videos.map((video)=>(
+        <InfiniteScroll
+        className="row" 
+        dataLength={videos.length}
+        next={fetchData}
+        hasMore={false}
+        loader={
+          <div className="spinner-border text-danger d-block mx-auto">
+            
+          </div>
+        }>
+        {!loading ? videos.map((video)=>(
           <Col key={uuidv4()} lg={3} md={4}> 
             <Video video={video} key={video.id}/>
           </Col>
-          ))
-        }
-      </Row>
+          )) : ([Array(20)].map(()=>(
+          <Col key={uuidv4()} lg={3} md={4}> 
+            <SkeletonVideo/>
+          </Col>
+          )
+           ))}
+         
+      </InfiniteScroll> 
     </Container>
   )
 }

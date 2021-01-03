@@ -4,6 +4,7 @@ import {AiFillEye} from 'react-icons/ai';
 import request from '../../axios';
 import moment from 'moment';
 import numeral from 'numeral';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Video({video}) {
 
@@ -61,11 +62,13 @@ get_channel_icon();
   return (
     <div className="video">
       <div className="video__top" >
-        <img src={medium.url} alt="썸네일"/>
-        <span>{_duration}</span>
+        {/* <img src={medium.url} alt="썸네일"/> */}
+        <LazyLoadImage src={medium.url} effect="blur" alt="썸네일"/>
+        <span className="video__top__duration">{_duration}</span>
       </div>
       <div className="video__title">
-        <img src={channelIcon?.url} alt="channnelIcon"/>
+        {/* <img src={channelIcon?.url} alt="channnelIcon"/> */}
+        <LazyLoadImage src={channelIcon?.url} effect="blur" alt="channnelIcon"/>
         {title}
       </div>
       <div className="video__channel">
