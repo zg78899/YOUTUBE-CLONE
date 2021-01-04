@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./_videoMetaData.scss";
 
 import { MdThumbDown, MdThumbUp } from "react-icons/md";
@@ -47,7 +47,28 @@ function VideoMetaData() {
         <button className="btn border-0 p-2 m-2">Subscribe</button>
       </div>
 
-      <div className="videoMetaData__description"></div>
+      <div className="videoMetaData__description">
+        <ShowMoreText
+          lines={3}
+          more="SHOW MORE"
+          less="SHOW LESS"
+          anchorClass="showMoreText"
+          expanded={false}
+        >
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio quasi
+          quaerat mollitia nemo magni? Cupiditate accusantium, inventore
+          consequatur veritatis fuga fugit incidunt eaque iste alias impedit.
+          Ducimus quidem a dolores repudiandae magni, dolor magnam? Quos
+          dignissimos sapiente inventore fuga in voluptates, laborum aliquam sed
+          quaerat obcaecati omnis, minima error tempora quis veniam quia odit
+          vitae pariatur ex! Dicta a non voluptas fugiat. At laudantium totam
+          recusandae facere quidem architecto nihil deleniti incidunt, delectus
+          laboriosam voluptates aliquam accusamus perspiciatis natus culpa.
+          Corporis, repellat. Autem voluptate, unde tempore perspiciatis sunt,
+          qui error consectetur accusantium numquam, minima temporibus
+          distinctio. Illum officiis tempore hic?
+        </ShowMoreText>
+      </div>
     </div>
   );
 }

@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Provider} from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "react-redux";
 
-import {BrowserRouter as Router} from 'react-router-dom'
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import "./_base.scss";
-import store from './redux/store';
+import store from "./redux/store";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,7 +17,7 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
