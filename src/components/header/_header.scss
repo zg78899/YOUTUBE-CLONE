@@ -85,6 +85,10 @@
   .header {
     padding: 1rem;
 
+    h1 {
+      display: none;
+    }
+
     form {
       flex: 1;
     }

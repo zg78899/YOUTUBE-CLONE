@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container } from 'react-bootstrap'
 import CateGoriesBar from '../../components/categoriesBar/CateGoriesBar'
 import Video from '../../components/video/Video'
 import { v4 as uuidv4 } from 'uuid';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getPopularVideos, getVideosByCateGories } from '../../redux/actions/video.action';
+//infinite Scroll
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Skeleton from 'react-loading-skeleton';
+//Skeleton
 import SkeletonVideo from '../../components/skeletons/SkeletonVideo';
 
 export default function HomeScreen() {
@@ -41,12 +44,14 @@ if(activeCategory === 'All'){
         {!loading ? videos.map((video)=>(
           <Col key={uuidv4()} lg={3} md={4}> 
             <Video video={video} key={video.id}/>
-          </Col>
-          )) : ([Array(20)].map(()=>(
+          </Col> 
+          )) : 
+          
+            [...Array(20)].map(()=>(
           <Col key={uuidv4()} lg={3} md={4}> 
             <SkeletonVideo/>
           </Col>
-          )
+          
            ))}
          
       </InfiniteScroll> 

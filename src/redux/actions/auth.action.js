@@ -16,7 +16,7 @@ export const login = ()=> async dispatch =>{
     provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl');
 
     const res = await auth.signInWithPopup(provider);
-    console.log(res );
+    // console.log(res );
 
     const accessToken = res.credential.accessToken;
 
@@ -40,7 +40,7 @@ export const login = ()=> async dispatch =>{
     });
 
   }catch(e){
-    console.log(e.message)
+    // console.log(e.message)
     dispatch({
       type:LOGIN_FAIL,
       payload:e.message

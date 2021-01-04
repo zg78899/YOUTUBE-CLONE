@@ -13,6 +13,7 @@ import {
   useHistory} from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
+import WatchScreen from './screens/watchScreen/WatchScreen';
 
 
 const Layout = ({children})=>{
@@ -24,10 +25,10 @@ const Layout = ({children})=>{
   return(
     <>
     <Header handleToggleSidebar={handleToggleSidebar}/>
-    <div className="app_container border border-info">
+    <div className="app_container " >
       <Sidebar sidebar={sidebar}
       handleToggleSidebar={handleToggleSidebar}/>
-      <Container className="app__main border border-warning">
+      <Container className="app__main ">
         {/* <HomeScreen/> */}
         {children}
       </Container>
@@ -68,6 +69,12 @@ function App() {
        <h1>Search me</h1>
        </Layout>
      </Route>
+     <Route path="/watch/:id">
+       <Layout>
+        <WatchScreen/>
+       </Layout>
+     </Route>
+
      <Route>
        <Redirect to="/"/>
      </Route>

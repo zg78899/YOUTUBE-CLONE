@@ -36,7 +36,7 @@ const get_video_details = async ()=>{
   });
   setDuration(items[0].contentDetails.duration);
   setViews(items[0].statistics.viewCount);
-  console.log(items[0]);
+  // console.log(items[0]);
 };  
 get_video_details();
 },[_videoId]);
@@ -63,12 +63,18 @@ get_channel_icon();
     <div className="video">
       <div className="video__top" >
         {/* <img src={medium.url} alt="썸네일"/> */}
-        <LazyLoadImage src={medium.url} effect="blur" alt="썸네일"/>
+        <LazyLoadImage
+         src={medium.url}
+         alt="썸네일" 
+         effect="blur"/>
         <span className="video__top__duration">{_duration}</span>
       </div>
       <div className="video__title">
         {/* <img src={channelIcon?.url} alt="channnelIcon"/> */}
-        <LazyLoadImage src={channelIcon?.url} effect="blur" alt="channnelIcon"/>
+        <LazyLoadImage 
+        src={channelIcon?.url}
+        alt="channnelIcon"
+        effect="blur"/>
         {title}
       </div>
       <div className="video__channel">
