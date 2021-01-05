@@ -9,6 +9,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useHistory } from "react-router-dom";
 
 export default function Video({ video }) {
+  const history = useHistory();
   const {
     id,
     snippet: {
@@ -29,8 +30,6 @@ export default function Video({ video }) {
 
   //video의 id가 object인 경우에 videoId 아님 id;
   const _videoId = id?.videoId || id;
-
-  const history = useHistory();
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -64,7 +63,6 @@ export default function Video({ video }) {
     };
 
     get_channel_icon();
-    
   }, [channelId]);
 
   const handleVideoClick = () => {

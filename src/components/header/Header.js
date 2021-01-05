@@ -4,8 +4,11 @@ import "./_header.scss";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdNotifications, MdApps } from "react-icons/md";
+import { useHistory } from "react-router-dom";
 
 export default function Header({ handleToggleSidebar }) {
+  const history = useHistory();
+
   return (
     <div className="border border-dark  header">
       <FaBars
@@ -14,11 +17,12 @@ export default function Header({ handleToggleSidebar }) {
         onClick={() => handleToggleSidebar()}
       />
       <img
+        onClick={() => history.push("/")}
         src="http://pngimg.com/uploads/youtube/youtube_PNG2.png"
         alt="youtute-logo"
         className="header__logo"
       />
-      <h1>KIM TUBE</h1>
+      <h1 onClick={() => history.push("/")}>KIM TUBE</h1>
       <form>
         <input type="text" placeholder="Search" />
         <button type="submit">

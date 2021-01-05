@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import { authReducer } from "./reducers/auth.reducer";
 import { homeVideosReducer } from "./reducers/videos.reducer";
 import { selectedVideoReducer } from "./reducers/videos.reducer";
-
+import { channelDetailReducer } from "./reducers/channel.reducer";
 // const initialState = {
 //   name:'Sumit',
 //   age:21
@@ -13,6 +13,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   homeVideos: homeVideosReducer,
   selectedVideo: selectedVideoReducer,
+  channelDetails: channelDetailReducer,
 });
 
 // const reducer = (initialState) => initialState;

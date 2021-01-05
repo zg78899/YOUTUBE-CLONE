@@ -17,6 +17,10 @@
 
   z-index: 999;
 
+  img,h1{
+    cursor: pointer;
+  }
+
   &__menu {
     // hamburger menu
     display: none;

@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./_videoMetaData.scss";
-
+import {
+  checkSubscriptionStatus,
+  getChannelDetails,
+} from "../../redux/actions/channel.action";
 import { MdThumbDown, MdThumbUp } from "react-icons/md";
 
 import numeral from "numeral";
 import moment from "moment";
 
 import ShowMoreText from "react-show-more-text";
+import { useDispatch, useSelector } from "react-redux";
 
 function VideoMetaData({ video: { snippet, statistics }, videoId }) {
+  const dispatch = useDispatch();
   const {
-    channelTitle,
-    title,
-    channelId,
-    thumbnails: { medium },
-    description,
-    publishedAt,
-  } = snippet;
+    snippet: channelSnippet,
+    statistics: channelStatistics,
+  } = useSelector((state) => state.channelDetails.channel);
+
+  const subscriptionStatus = useSelector(
+    (state) => state.channelDetails.subscriptionStatus
+  );
+
+  const { channelTitle, title, channelId, description, publishedAt } = snippet;
+
   const { viewCount, likeCount, dislikeCount } = statistics;
+
+  useEffect(() => {
+    dispatch(getChannelDetails(channelId));
+    dispatch(checkSubscriptionStatus(channelId));
+  }, [dispatch, channelId]);
   return (
     <div className="videoMetaData py-2">
       <div className="videoMetaData__top ">
@@ -42,14 +55,24 @@ function VideoMetaData({ video: { snippet, statistics }, videoId }) {
 
       <div className="videoMetaData__channel d-flex justify-content-between align-items-center my-2 py-3">
         <div className="d-flex">
-          <img className="rounder-circle mr-3" src={medium.url} alt="avartar" />
+          <img
+            className="rounded-circle mr-3"
+            src={channelSnippet?.thumbnails?.default?.url}
+            alt="avartar"
+          />
           <div className="d-flex flex-column">
             <span>{channelTitle}</span>
-            <span>{numeral(10000).format("0.a")} 구독자</span>
+            <span>
+              {numeral(channelStatistics?.subscriberCount).format("0.a")} 구독자
+            </span>
           </div>
         </div>
 
-        <button className="btn border-0 p-2 m-2">구독</button>
+        <button
+          className={`btn border-0 p-2 m-2 ${subscriptionStatus && "btn-gray"}`}
+        >
+          {subscriptionStatus ? "구독중" : "구독"}
+        </button>
       </div>
 
       <div className="videoMetaData__description">
