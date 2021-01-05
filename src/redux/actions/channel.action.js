@@ -10,18 +10,20 @@ export const getChannelDetails = (id) => async (dispatch) => {
   dispatch({
     type: CHANNEL_DETAILS_REQUEST,
   });
+
   try {
     const { data } = await request("/channels", {
       params: {
         part: "snippet,statistics,contentDetails",
-        id: id,
+        id,
       },
     });
-    console.log(data);
+
     dispatch({
       type: CHANNEL_DETAILS_SUCCESS,
       payload: data.items[0],
     });
+    console.log(data);
   } catch (e) {
     console.log(e.response.data);
     dispatch({
@@ -33,7 +35,7 @@ export const getChannelDetails = (id) => async (dispatch) => {
 
 export const checkSubscriptionStatus = (id) => async (dispatch, getState) => {
   try {
-    const { data } = await request("/subscription", {
+    const { data } = await request("/subscriptions", {
       params: {
         part: "snippet",
         forChannelId: id,
@@ -43,13 +45,12 @@ export const checkSubscriptionStatus = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${getState().auth.accessToken}`,
       },
     });
-    console.log(data);
     dispatch({
       type: SET_SUBSCRIPTION_STATUS,
       payload: data.items.length !== 0,
     });
     console.log(data);
-  } catch (e) {
-    console.log(e.message);
+  } catch (error) {
+    console.log(error.response.data);
   }
 };

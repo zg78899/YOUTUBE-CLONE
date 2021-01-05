@@ -13,7 +13,12 @@ import ShowMoreText from "react-show-more-text";
 import { useDispatch, useSelector } from "react-redux";
 
 function VideoMetaData({ video: { snippet, statistics }, videoId }) {
+  const { channelTitle, title, channelId, description, publishedAt } = snippet;
+
+  const { viewCount, likeCount, dislikeCount } = statistics;
+
   const dispatch = useDispatch();
+
   const {
     snippet: channelSnippet,
     statistics: channelStatistics,
@@ -23,14 +28,11 @@ function VideoMetaData({ video: { snippet, statistics }, videoId }) {
     (state) => state.channelDetails.subscriptionStatus
   );
 
-  const { channelTitle, title, channelId, description, publishedAt } = snippet;
-
-  const { viewCount, likeCount, dislikeCount } = statistics;
-
   useEffect(() => {
     dispatch(getChannelDetails(channelId));
     dispatch(checkSubscriptionStatus(channelId));
   }, [dispatch, channelId]);
+
   return (
     <div className="videoMetaData py-2">
       <div className="videoMetaData__top ">
@@ -69,7 +71,7 @@ function VideoMetaData({ video: { snippet, statistics }, videoId }) {
         </div>
 
         <button
-          className={`btn border-0 p-2 m-2 ${subscriptionStatus && "btn-gray"}`}
+          className={`p-2 m-2 border-0 btn ${subscriptionStatus && "btn-gray"}`}
         >
           {subscriptionStatus ? "구독중" : "구독"}
         </button>

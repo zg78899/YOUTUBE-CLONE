@@ -21,7 +21,6 @@ function WatchScreen() {
   }, [dispatch, id]);
 
   const { video, loading } = useSelector((state) => state.selectedVideo);
-  console.log(video?.snippet);
 
   return (
     <Row>

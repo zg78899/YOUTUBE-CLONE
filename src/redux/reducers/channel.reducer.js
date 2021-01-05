@@ -20,12 +20,14 @@ export const channelDetailReducer = (
         ...state,
         loading: true,
       };
+
     case CHANNEL_DETAILS_SUCCESS:
       return {
         ...state,
         loading: false,
         channel: payload,
       };
+
     case CHANNEL_DETAILS_FAIL:
       return {
         ...state,
@@ -33,6 +35,7 @@ export const channelDetailReducer = (
         channel: null,
         error: payload,
       };
+
     case SET_SUBSCRIPTION_STATUS:
       return {
         ...state,
