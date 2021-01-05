@@ -6,6 +6,7 @@ import request from "../../axios";
 import moment from "moment";
 import numeral from "numeral";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useHistory } from "react-router-dom";
 
 export default function Video({ video }) {
   const {
@@ -28,6 +29,8 @@ export default function Video({ video }) {
 
   //video의 id가 object인 경우에 videoId 아님 id;
   const _videoId = id?.videoId || id;
+
+  const history = useHistory();
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -61,10 +64,15 @@ export default function Video({ video }) {
     };
 
     get_channel_icon();
+    
   }, [channelId]);
 
+  const handleVideoClick = () => {
+    history.push(`/watch/${_videoId}`);
+  };
+
   return (
-    <div className="video">
+    <div className="video" onClick={handleVideoClick}>
       <div className="video__top">
         {/* <img src={medium.url} alt="썸네일"/> */}
         <LazyLoadImage src={medium.url} alt="썸네일" effect="blur" />

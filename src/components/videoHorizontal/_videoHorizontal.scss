@@ -71,7 +71,7 @@ font-size: 0.9rem;
     //   display: none;
     // }
     &__title{
-      font-size: 14px;
+      font-size: 1rem;
       @include line-clamp(2);
     }
   }

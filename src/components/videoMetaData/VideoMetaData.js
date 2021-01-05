@@ -8,24 +8,33 @@ import moment from "moment";
 
 import ShowMoreText from "react-show-more-text";
 
-function VideoMetaData() {
+function VideoMetaData({ video: { snippet, statistics }, videoId }) {
+  const {
+    channelTitle,
+    title,
+    channelId,
+    thumbnails: { medium },
+    description,
+    publishedAt,
+  } = snippet;
+  const { viewCount, likeCount, dislikeCount } = statistics;
   return (
     <div className="videoMetaData py-2">
       <div className="videoMetaData__top ">
-        <h5>video Title</h5>
+        <h5>{title}</h5>
         <div className="d-flex justify-content-between align-items-center py-1">
           <span>
-            {numeral(10000).format("0.a")} Views •
-            {moment("2021-01-04").fromNow()}
+            {numeral(viewCount).format("0.a")} Views •
+            {moment(publishedAt).fromNow()}
           </span>
           <div>
             <span className="mr-3">
               <MdThumbUp size={26} />
-              {numeral(10000).format("0.a")}
+              {numeral(likeCount).format("0.a")}
             </span>
             <span className="mr-3">
               <MdThumbDown size={26} />
-              {numeral(10000).format("0.a")}
+              {numeral(dislikeCount).format("0.a")}
             </span>
           </div>
         </div>
@@ -33,40 +42,25 @@ function VideoMetaData() {
 
       <div className="videoMetaData__channel d-flex justify-content-between align-items-center my-2 py-3">
         <div className="d-flex">
-          <img
-            className="rounder-circle mr-3"
-            src="/avartar.png"
-            alt="avartar"
-          />
+          <img className="rounder-circle mr-3" src={medium.url} alt="avartar" />
           <div className="d-flex flex-column">
-            <span>Kim Jae Hun</span>
-            <span>{numeral(10000).format("0.a")} Views •</span>
+            <span>{channelTitle}</span>
+            <span>{numeral(10000).format("0.a")} 구독자</span>
           </div>
         </div>
 
-        <button className="btn border-0 p-2 m-2">Subscribe</button>
+        <button className="btn border-0 p-2 m-2">구독</button>
       </div>
 
       <div className="videoMetaData__description">
         <ShowMoreText
           lines={3}
-          more="SHOW MORE"
-          less="SHOW LESS"
+          more="더보기"
+          less="접기"
           anchorClass="showMoreText"
           expanded={false}
         >
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio quasi
-          quaerat mollitia nemo magni? Cupiditate accusantium, inventore
-          consequatur veritatis fuga fugit incidunt eaque iste alias impedit.
-          Ducimus quidem a dolores repudiandae magni, dolor magnam? Quos
-          dignissimos sapiente inventore fuga in voluptates, laborum aliquam sed
-          quaerat obcaecati omnis, minima error tempora quis veniam quia odit
-          vitae pariatur ex! Dicta a non voluptas fugiat. At laudantium totam
-          recusandae facere quidem architecto nihil deleniti incidunt, delectus
-          laboriosam voluptates aliquam accusamus perspiciatis natus culpa.
-          Corporis, repellat. Autem voluptate, unde tempore perspiciatis sunt,
-          qui error consectetur accusantium numquam, minima temporibus
-          distinctio. Illum officiis tempore hic?
+          {description}
         </ShowMoreText>
       </div>
     </div>

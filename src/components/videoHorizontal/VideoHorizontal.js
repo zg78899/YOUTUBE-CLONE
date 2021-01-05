@@ -4,7 +4,7 @@ import moment from "moment";
 import numeral from "numeral";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { AiFillEye } from "react-icons/ai";
-import request from "../../axios";
+// import request from "../../axios";s
 import { Col, Row } from "react-bootstrap";
 
 //using react-bootstarp

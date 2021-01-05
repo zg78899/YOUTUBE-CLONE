@@ -2,6 +2,9 @@ import {
   HOME_VIDEOS_SUCCESS,
   HOME_VIDEOS_FAIL,
   HOME_VIDEOS_REQUEST,
+  SELECT_VIDEO_REQUEST,
+  SELECT_VIDEO_SUCCESS,
+  SELECT_VIDEO_FAIL,
 } from "../actionType";
 import request from "../../axios";
 
@@ -75,6 +78,31 @@ export const getVideosByCateGories = (keyword) => async (
     console.log(e.message);
     dispatch({
       type: HOME_VIDEOS_FAIL,
+      payload: e.message,
+    });
+  }
+};
+
+//get videoID reducer
+export const getVideoId = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: SELECT_VIDEO_REQUEST,
+    });
+    const { data } = await request("/videos", {
+      params: {
+        part: "snippet,statistics",
+        id: id,
+      },
+    });
+    dispatch({
+      type: SELECT_VIDEO_SUCCESS,
+      payload: data.items[0],
+    });
+  } catch (e) {
+    console.log(e.message);
+    dispatch({
+      type: SELECT_VIDEO_FAIL,
       payload: e.message,
     });
   }
