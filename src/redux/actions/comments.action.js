@@ -34,7 +34,7 @@ export const getCommentOfVideoById = (id) => async (dispatch) => {
 };
 
 //comment add
-export const adComment = (id, text) => async (dispatch, getState) => {
+export const addComment = (id, text) => async (dispatch, getState) => {
   try {
     const obj = {
       snippet: {
@@ -51,7 +51,6 @@ export const adComment = (id, text) => async (dispatch, getState) => {
     await request.post("/commentThreads", obj, {
       params: {
         part: "snippet",
-        videoId: id,
       },
       headers: {
         Authorization: `Bearer ${getState().auth.accessToken}`,
@@ -64,11 +63,11 @@ export const adComment = (id, text) => async (dispatch, getState) => {
     //불러오기
     setTimeout(() => {
       dispatch(getCommentOfVideoById(id));
-    }, 3000);
+    }, 4000);
   } catch (e) {
     dispatch({
       type: CREATE_COMMENT_FAIL,
-      payload: e.message,
+      payload: e.response.data.message,
     });
   }
 };

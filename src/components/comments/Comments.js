@@ -4,13 +4,13 @@ import Comment from "../comment/Comment";
 // import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  adComment,
+  addComment,
   getCommentOfVideoById,
 } from "../../redux/actions/comments.action";
 
 function Comments({ videoId, totalComments }) {
-  const dispatch = useDispatch();
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCommentOfVideoById(videoId));
@@ -24,8 +24,10 @@ function Comments({ videoId, totalComments }) {
 
   const handleComment = (e) => {
     e.preventDefault();
+
     if (text.length === 0) return;
-    dispatch(adComment(videoId, text));
+
+    dispatch(addComment(videoId, text));
     setText("");
   };
   return (
@@ -35,13 +37,13 @@ function Comments({ videoId, totalComments }) {
         <img className="rounded-circle mr-3" src="/avartar.png" alt="avartar" />
         <form onSubmit={handleComment} className="d-flex flex-grow-1" action="">
           <input
-            onChange={(e) => setText(e.target.value)}
             className="flex-grow-1"
-            placeholder="Wirte a comment..."
+            placeholder="공개 댓글 추가..."
             type="text"
             value={text}
+            onChange={(e) => setText(e.target.value)}
           />
-          <button className="border-0 p-2">Comment</button>
+          <button className="border-0 p-2">입력</button>
         </form>
       </div>
 

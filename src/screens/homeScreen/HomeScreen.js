@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
 import CateGoriesBar from "../../components/categoriesBar/CateGoriesBar";
 import Video from "../../components/video/Video";
@@ -16,6 +16,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import SkeletonVideo from "../../components/skeletons/SkeletonVideo";
 
 export default function HomeScreen() {
+  const [load, setLoad] = useState(false);
+  const hasMoreLoad = () => {
+    setLoad((value) => !value);
+  };
   const { videos, activeCategory, loading } = useSelector(
     (state) => state.homeVideos
   );
@@ -56,6 +60,7 @@ export default function HomeScreen() {
                 <SkeletonVideo />
               </Col>
             ))}
+        <span onClick={() => hasMoreLoad()}>더보기</span>
       </InfiniteScroll>
     </Container>
   );
