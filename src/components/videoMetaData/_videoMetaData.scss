@@ -16,15 +16,18 @@
       
     }
     button{
-      background-color:red;
+      background-color:#CC0000;
       color:#fff;
-      border-radius: 0;
+      border-radius: 2px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      
+      width:5.14em;
+      padding: 10px 16px;
+      font-size:1rem;
+
       &.btn-gray{
-        background-color: gray;
-        color:black;
+        background-color: #ffffff1a;
+        color:#AAAAAA;
       }
       &:hover{
         color:#fff;

@@ -2,15 +2,26 @@ import React from "react";
 import "./_comment.scss";
 import moment from "moment";
 
-function Comment() {
+function Comment({ comment }) {
+  const {
+    authorDisplayName,
+    authorProfileImageUrl,
+    publishedAt,
+    textOriginal,
+  } = comment;
+
   return (
     <div className="comment p-2 d-flex">
-      <img className="rounder-circle mr-3" src="/avartar.png" alt="avartar" />
+      <img
+        className="rounded-circle mr-3"
+        src={authorProfileImageUrl}
+        alt="avartar"
+      />
       <div className="comment__body">
         <p className="comment__header mb-1">
-          KIM JAE HUN •{moment("2021-01-04").fromNow()}
+          {authorDisplayName} • {moment(publishedAt).fromNow()}
         </p>
-        <p className="mb-0">Nice Video</p>
+        <p className="mb-0">{textOriginal}</p>
       </div>
     </div>
   );
