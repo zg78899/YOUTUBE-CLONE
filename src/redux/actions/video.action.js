@@ -110,6 +110,7 @@ export const getVideoId = (id) => async (dispatch) => {
     });
   }
 };
+
 //GET relatedVideos
 export const getRelatedVideoId = (id) => async (dispatch) => {
   try {
@@ -131,10 +132,10 @@ export const getRelatedVideoId = (id) => async (dispatch) => {
     console.log(data);
     console.log(data.items);
   } catch (e) {
-    // console.log(e.response.data.message);
+    console.log(e.response.data.message);
     dispatch({
       type: RELATED_VIDEO_FAIL,
-      payload: e.message,
+      payload: e.response.data.message,
     });
   }
 };

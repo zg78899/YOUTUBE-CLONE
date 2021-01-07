@@ -5,8 +5,6 @@ import { FaBars } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdNotifications, MdApps } from "react-icons/md";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/actions/auth.action";
 
 export default function Header({ handleToggleSidebar }) {
   const history = useHistory();

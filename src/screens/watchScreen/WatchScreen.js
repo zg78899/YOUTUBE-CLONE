@@ -13,6 +13,7 @@ import {
   getRelatedVideoId,
   getVideoId,
 } from "../../redux/actions/video.action";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 function WatchScreen() {
   //id
@@ -21,12 +22,13 @@ function WatchScreen() {
 
   useEffect(() => {
     dispatch(getVideoId(id));
+
     dispatch(getRelatedVideoId(id));
   }, [dispatch, id]);
 
-  const { video, loading } = useSelector((state) => state?.selectedVideo);
+  const { video, loading } = useSelector((state) => state.selectedVideo);
   const { videos, loading: realtedVideosLoading } = useSelector(
-    (state) => state?.relatedVideos
+    (state) => state.relatedVideos
   );
 
   return (
@@ -53,12 +55,17 @@ function WatchScreen() {
         />
       </Col>
       <Col lg={4}>
-        {!realtedVideosLoading &&
-          videos.filter((video) =>
-            video.snippet.map(() => (
-              <VideoHorizontal video={video} key={uuidv4()} />
+        {!realtedVideosLoading ? (
+          videos
+            ?.filter((video) => video.snippet)
+            .map((video) => (
+              <VideoHorizontal video={video} key={video.id.videoId} />
             ))
-          )}
+        ) : (
+          <SkeletonTheme color="#343a40" highlightColor="#3c4147">
+            <Skeleton width="100%" height="130px" count={15} />
+          </SkeletonTheme>
+        )}
       </Col>
     </Row>
   );
