@@ -9,7 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import Comments from "../../components/comments/Comments";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideoId } from "../../redux/actions/video.action";
+import {
+  getRelatedVideoId,
+  getVideoId,
+} from "../../redux/actions/video.action";
 
 function WatchScreen() {
   //id
@@ -18,9 +21,13 @@ function WatchScreen() {
 
   useEffect(() => {
     dispatch(getVideoId(id));
+    dispatch(getRelatedVideoId(id));
   }, [dispatch, id]);
 
-  const { video, loading } = useSelector((state) => state.selectedVideo);
+  const { video, loading } = useSelector((state) => state?.selectedVideo);
+  const { videos, loading: realtedVideosLoading } = useSelector(
+    (state) => state?.relatedVideos
+  );
 
   return (
     <Row>
@@ -46,9 +53,12 @@ function WatchScreen() {
         />
       </Col>
       <Col lg={4}>
-        {[...Array(10)].map(() => (
-          <VideoHorizontal key={uuidv4()} />
-        ))}
+        {!realtedVideosLoading &&
+          videos.filter((video) =>
+            video.snippet.map(() => (
+              <VideoHorizontal video={video} key={uuidv4()} />
+            ))
+          )}
       </Col>
     </Row>
   );

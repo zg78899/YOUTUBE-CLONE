@@ -51,6 +51,6 @@ export const checkSubscriptionStatus = (id) => async (dispatch, getState) => {
     });
     console.log(data);
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.message);
   }
 };
