@@ -7,6 +7,7 @@ import { selectedVideoReducer } from "./reducers/videos.reducer";
 import { channelDetailReducer } from "./reducers/channel.reducer";
 import { commentListReducer } from "./reducers/comments.reducer";
 import { relatedVideoReducer } from "./reducers/videos.reducer";
+import { searchVideoReducer } from "./reducers/videos.reducer";
 
 // const initialState = {
 //   name:'Sumit',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   channelDetails: channelDetailReducer,
   commentsList: commentListReducer,
   relatedVideos: relatedVideoReducer,
+  searchVideos: searchVideoReducer,
 });
 
 // const reducer = (initialState) => initialState;

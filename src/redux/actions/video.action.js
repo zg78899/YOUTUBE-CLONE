@@ -8,11 +8,13 @@ import {
   RELATED_VIDEO_FAIL,
   RELATED_VIDEO_REQUEST,
   RELATED_VIDEO_SUCCESS,
+  SEARCH_VIDEOS_REQUEST,
+  SEARCH_VIDEOS_SUCCESS,
+  SEARCH_VIDEOS_FAIL,
 } from "../actionType";
 import request from "../../axios";
 
 //main page mostPopular Video
-//video
 export const getPopularVideos = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -47,8 +49,7 @@ export const getPopularVideos = () => async (dispatch, getState) => {
   }
 };
 
-//serac keyword
-//serach
+//search keyword
 export const getVideosByCateGories = (keyword) => async (
   dispatch,
   getState
@@ -86,7 +87,7 @@ export const getVideosByCateGories = (keyword) => async (
   }
 };
 
-//get videoID reducer
+//get videoId
 export const getVideoId = (id) => async (dispatch) => {
   try {
     dispatch({
@@ -111,7 +112,7 @@ export const getVideoId = (id) => async (dispatch) => {
   }
 };
 
-//GET relatedVideos
+//get relatedVideos
 export const getRelatedVideoId = (id) => async (dispatch) => {
   try {
     dispatch({
@@ -136,6 +137,36 @@ export const getRelatedVideoId = (id) => async (dispatch) => {
     dispatch({
       type: RELATED_VIDEO_FAIL,
       payload: e.response.data.message,
+    });
+  }
+};
+
+//serach videos
+export const getVideosBySearch = (keyword) => async (dispatch) => {
+  try {
+    dispatch({
+      type: SEARCH_VIDEOS_REQUEST,
+    });
+
+    const { data } = await request("/search", {
+      params: {
+        part: "snippet",
+        maxResults: 20,
+        q: keyword,
+        type: "video,channel",
+      },
+    });
+    //  console.log(data);
+
+    dispatch({
+      type: SEARCH_VIDEOS_SUCCESS,
+      payload: data.items,
+    });
+  } catch (e) {
+    console.log(e.message);
+    dispatch({
+      type: SEARCH_VIDEOS_FAIL,
+      payload: e.message,
     });
   }
 };

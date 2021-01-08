@@ -11,9 +11,10 @@ import { getRelatedVideoId } from "../../redux/actions/video.action";
 import { channelDetailReducer } from "../../redux/reducers/channel.reducer";
 import request from "../../axios";
 import { useHistory } from "react-router-dom";
+import { MdDescription } from "react-icons/md";
 
 //using react-bootstarp
-function VideoHorizontal({ video }) {
+function VideoHorizontal({ video, searchScreen }) {
   const [views, setViews] = useState(null);
   const [duration, setDuration] = useState(null);
   const [channelIcon, setChannelIcon] = useState(null);
@@ -24,10 +25,14 @@ function VideoHorizontal({ video }) {
       channelId,
       channelTitle,
       title,
+      description,
       publishedAt,
       thumbnails: { medium },
     },
   } = video;
+
+  const isVideo = id.kind === "youtube#video";
+  const thumbnail = !isVideo && `videoHorizontal__thumbnail-channel`;
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -68,31 +73,49 @@ function VideoHorizontal({ video }) {
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
 
   const history = useHistory();
-  const handleClick = ()=>{
-    history.push(`/watch/${id.videoId}`)
-  }
+
+  const handleClick = () => {
+    isVideo
+      ? history.push(`/watch/${id.videoId}`)
+      : history.push(`/cahnnel/${id.channelId}`);
+  };
   return (
-    <Row onClick = {handleClick} className="videoHorizontal m-1 py-2 align-items-center">
+    <Row
+      onClick={handleClick}
+      className="videoHorizontal m-1 py-2 align-items-center"
+    >
       {/* //TODO refracter grid  */}
-      <Col xs={6} md={4} className="videoHorizontal__left">
+      <Col xs={6} md={searchScreen ? 4 : 6} className="videoHorizontal__left">
         <LazyLoadImage
-          className="videoHorizontal__thumbnail"
+          className={`videoHorizontal__thumbnail ${thumbnail}`}
           wrapperClassName="videoHorizontal__thumbnail-wrapper"
           src={medium.url}
           alt="썸네일"
           effect="blur"
         />
-        <span className="videoHorizontal__duration">{_duration}</span>
+        {isVideo && (
+          <span className="videoHorizontal__duration">{_duration}</span>
+        )}
       </Col>
-      <Col className="videoHorizontal__right p-0" xs={6} md={6}>
+
+      <Col
+        className="videoHorizontal__right p-0"
+        xs={6}
+        md={searchScreen ? 6 : 6}
+      >
         <p className="videoHorizontal__title mb-1">{title}</p>
-        <div className="videoHorizontal_details">
-          <AiFillEye /> {numeral(views).format("0.a")} Views •
-          {moment(publishedAt).fromNow()}
-        </div>
+
+        {isVideo && (
+          <div className="videoHorizontal_details">
+            <AiFillEye /> {numeral(views).format("0.a")} Views •
+            {moment(publishedAt).fromNow()}
+          </div>
+        )}
+
+        {isVideo && <p className="mt-1"> {description}</p>}
+
         <div className="videoHorizontal__channel d-flex align-items-center my-1">
-          {/* TODO show in search screen */}
-          {/* <LazyLoadImage src={channelId} effect="blur " /> */}
+          {isVideo && <LazyLoadImage src={channelIcon?.url} effect="blur " />}
           <p className="mb-0">{channelTitle}</p>
         </div>
       </Col>
