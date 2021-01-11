@@ -7,9 +7,12 @@ import {
   addComment,
   getCommentOfVideoById,
 } from "../../redux/actions/comments.action";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Comments({ videoId, totalComments }) {
   const [text, setText] = useState("");
+  const [load, setLoad] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,6 +33,19 @@ function Comments({ videoId, totalComments }) {
     dispatch(addComment(videoId, text));
     setText("");
   };
+
+  const fetchData = (load) => {
+    if (comments.length >= 100) {
+      setLoad(false);
+      return;
+    }
+    if (load) {
+      setTimeout(() => {
+        dispatch(getCommentOfVideoById(videoId));
+      }, 3000);
+    } else return;
+  };
+
   return (
     <div className="comments">
       <p>{totalComments} Comments</p>
@@ -48,9 +64,25 @@ function Comments({ videoId, totalComments }) {
       </div>
 
       <div className="comments__list">
-        {_comments?.map((comment, i) => (
-          <Comment comment={comment} key={i} />
-        ))}
+        <InfiniteScroll
+          className="infinite-scroll"
+          dataLength={comments.length}
+          next={fetchData}
+          hasMore={load}
+          loader={
+            <div className="spinner-border text-danger d-block mx-auto"></div>
+          }
+        >
+          {_comments?.map((comment, i) => (
+            <Comment comment={comment} key={i} />
+          ))}
+        </InfiniteScroll>
+        <span
+          className="comment__show-more d-flex justify-content-center align-items-center"
+          onClick={() => setLoad(!load)}
+        >
+          더보기
+        </span>
       </div>
     </div>
   );

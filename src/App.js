@@ -21,10 +21,7 @@ const Layout = ({ children }) => {
       <Header handleToggleSidebar={handleToggleSidebar} />
       <div className="app_container ">
         <Sidebar sidebar={sidebar} handleToggleSidebar={handleToggleSidebar} />
-        <Container className="app__main ">
-          {/* <HomeScreen/> */}
-          {children}
-        </Container>
+        <Container className="app__main ">{children}</Container>
       </div>
     </>
   );

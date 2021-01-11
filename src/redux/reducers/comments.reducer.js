@@ -7,7 +7,8 @@ import {
 export const commentListReducer = (
   state = {
     loading: true,
-    comments: null,
+    comments: [],
+    nextPageToken: null,
   },
   action
 ) => {
@@ -23,7 +24,8 @@ export const commentListReducer = (
       return {
         ...state,
         loading: false,
-        comments: payload,
+        comments: state.comments.concat(payload.comments),
+        nextPageToken: payload.nextPageToken,
       };
 
     case COMMENT_LIST_FAIL:

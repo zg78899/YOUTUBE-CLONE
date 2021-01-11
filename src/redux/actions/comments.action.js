@@ -7,7 +7,7 @@ import {
 } from "../actionType";
 import request from "../../axios";
 
-export const getCommentOfVideoById = (id) => async (dispatch) => {
+export const getCommentOfVideoById = (id) => async (dispatch, getState) => {
   dispatch({
     type: COMMENT_LIST_REQUEST,
   });
@@ -17,14 +17,19 @@ export const getCommentOfVideoById = (id) => async (dispatch) => {
       params: {
         part: "snippet",
         videoId: id,
+        pageToken: getState().commentsList.nextPageToken,
       },
     });
 
     dispatch({
       type: COMMENT_LIST_SUCCESS,
-      payload: data.items,
+      payload: {
+        comments: data.items,
+        nextPageToken: data.nextPageToken,
+      },
     });
     console.log(data);
+    console.log("GETSTATE", getState());
   } catch (e) {
     dispatch({
       type: COMMENT_LIST_FAIL,

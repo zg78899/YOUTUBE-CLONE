@@ -14,12 +14,11 @@ import {
 import InfiniteScroll from "react-infinite-scroll-component";
 //Skeleton
 import SkeletonVideo from "../../components/skeletons/SkeletonVideo";
+import "./_homeScreen.scss";
 
 export default function HomeScreen() {
   const [load, setLoad] = useState(false);
-  const hasMoreLoad = () => {
-    setLoad((value) => !value);
-  };
+
   const { videos, activeCategory, loading } = useSelector(
     (state) => state.homeVideos
   );
@@ -29,11 +28,19 @@ export default function HomeScreen() {
     dispatch(getPopularVideos());
   }, [dispatch]);
 
-  const fetchData = () => {
+  const fetchData = (load) => {
     if (activeCategory === "All") {
-      dispatch(getPopularVideos());
+      if (load) {
+        setTimeout(() => {
+          dispatch(getPopularVideos());
+        }, 2000);
+      }
     } else {
-      dispatch(getVideosByCateGories(activeCategory));
+      if (load) {
+        setTimeout(() => {
+          dispatch(getVideosByCateGories(activeCategory));
+        }, 2000);
+      }
     }
   };
 
@@ -44,7 +51,7 @@ export default function HomeScreen() {
         className="row"
         dataLength={videos.length}
         next={fetchData}
-        hasMore={false}
+        hasMore={load}
         loader={
           <div className="spinner-border text-danger d-block mx-auto"></div>
         }
@@ -60,8 +67,13 @@ export default function HomeScreen() {
                 <SkeletonVideo />
               </Col>
             ))}
-        <span onClick={() => hasMoreLoad()}>더보기</span>
       </InfiniteScroll>
+      <span
+        className="comment__show-more d-flex justify-content-center align-items-center"
+        onClick={() => setLoad((load) => !load)}
+      >
+        더보기
+      </span>
     </Container>
   );
 }

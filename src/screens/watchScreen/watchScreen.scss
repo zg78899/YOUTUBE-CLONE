@@ -1,8 +1,14 @@
 .watchScreen__player {
 
-  height: 60vh;
+  position: relative;
+  padding-bottom: 56.25%;
   background-color: #353946;
   width: 100%;
   margin-bottom: 2rem;
   
+}
+.watchScreen__player iframe{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

@@ -8,6 +8,17 @@
   &__header{
     color:#fff;
   }
-  
+  &__show-more{
+    border: 2px solid #353956;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem 0;
+    background: #353956;
+    cursor: pointer;
+  }
+  &__show-more:hover{
+    background-color: transparent;
+  }
 
 }

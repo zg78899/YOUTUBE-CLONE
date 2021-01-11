@@ -4,6 +4,12 @@
 
   margin-top: 10vh;
 }
+.app__main.container{
+  max-width: 80%;
+  & > .container{
+    max-width:80%;
+  }
+}
 
 // .app__main {
 //   overflow-y: scroll;

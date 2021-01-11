@@ -20,6 +20,16 @@
   img,h1{
     cursor: pointer;
   }
+  h1{
+    margin:0 10px;
+    font-size: 2rem;
+  }
+  
+  &__main-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__menu {
     // hamburger menu
@@ -72,7 +82,7 @@
   &__icons {
     flex: 0.15;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 
     img {

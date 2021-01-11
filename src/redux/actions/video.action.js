@@ -30,7 +30,7 @@ export const getPopularVideos = () => async (dispatch, getState) => {
         pageToken: getState().homeVideos.nextPageToken,
       },
     });
-    //  console.log(data);
+    console.log(data);
 
     dispatch({
       type: HOME_VIDEOS_SUCCESS,
