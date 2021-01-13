@@ -1,5 +1,7 @@
 @import "../../base.scss";
-
+.__react_component_tooltip{
+  z-index: 999px;
+}
 .sidebar {
   background-color: $black-secondary;
   display: flex;
@@ -13,6 +15,9 @@
   position: sticky;
   top: 10vh;
   left: 0;
+  a{
+    color: inherit;
+  }
 
   li {
     display: flex;

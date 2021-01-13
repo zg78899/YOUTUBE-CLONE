@@ -11,7 +11,8 @@ import {
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { log_out } from "../../redux/actions/auth.action";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 
 export default function Sidebar({ sidebar, handleToggleSidebar }) {
   const dispatch = useDispatch();
@@ -25,37 +26,45 @@ export default function Sidebar({ sidebar, handleToggleSidebar }) {
       className={sidebar ? "sidebar open " : "sidebar"}
       onClick={() => handleToggleSidebar(false)}
     >
-      <li onClick={() => history.push("/")}>
+      <ReactTooltip
+        className="toltip"
+        place="right"
+        type="light"
+        effect="float"
+      />
+      <li data-tip="Home" onClick={() => history.push("/")}>
         <MdHome size={23} />
         <span>Home</span>
       </li>
-      <li>
-        <MdSubscriptions size={23} />
-        <span>Subscriptions</span>
-      </li>
-      <li>
+      <Link to="/feed/subscriptions">
+        <li data-tip="Subscriptions">
+          <MdSubscriptions size={23} />
+          <span>Subscriptions</span>
+        </li>
+      </Link>
+      <li data-tip="Like Videos">
         <MdThumbUp size={23} />
         <span>Like Videos</span>
       </li>
 
-      <li>
+      <li data-tip="History ">
         <MdHistory size={23} />
         <span>History</span>
       </li>
 
-      <li>
+      <li data-tip="Library">
         <MdLibraryBooks size={23} />
         <span>library</span>
       </li>
 
-      <li>
+      <li data-tip="I Dont Like">
         <MdSentimentDissatisfied size={23} />
         <span>i don't know</span>
       </li>
 
       <hr />
 
-      <li onClick={handleLogout}>
+      <li data-tip="Log out" onClick={handleLogout}>
         <MdExitToApp size={23} />
         <span>Log out</span>
       </li>

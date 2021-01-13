@@ -11,6 +11,9 @@ import {
   SEARCH_VIDEOS_REQUEST,
   SEARCH_VIDEOS_SUCCESS,
   SEARCH_VIDEOS_FAIL,
+  SUBSCRIPTIONS_CHANNEL_REQUEST,
+  SUBSCRIPTIONS_CHANNEL_SUCCESS,
+  SUBSCRIPTIONS_CHANNEL_FAIL,
 } from "../actionType";
 import request from "../../axios";
 
@@ -133,10 +136,10 @@ export const getRelatedVideoId = (id) => async (dispatch) => {
     console.log(data);
     console.log(data.items);
   } catch (e) {
-    console.log(e.response.data.message);
+    console.log(e.message);
     dispatch({
       type: RELATED_VIDEO_FAIL,
-      payload: e.response.data.message,
+      payload: e.message,
     });
   }
 };
@@ -167,6 +170,37 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
     dispatch({
       type: SEARCH_VIDEOS_FAIL,
       payload: e.message,
+    });
+  }
+};
+
+//get subscriptionChannel video
+export const getVideoByChannel = () => async (dispatch, getState) => {
+  dispatch({
+    type: SUBSCRIPTIONS_CHANNEL_REQUEST,
+  });
+
+  try {
+    const { data } = await request("/subscriptions", {
+      params: {
+        part: "snippet,contentDetails",
+        mine: true,
+        maxResults: 20,
+      },
+      headers: {
+        Authorization: `Bearer ${getState().auth.accessToken}`,
+      },
+    });
+    dispatch({
+      type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
+      payload: data.items,
+    });
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+    dispatch({
+      type: SUBSCRIPTIONS_CHANNEL_FAIL,
+      payload: error.message,
     });
   }
 };

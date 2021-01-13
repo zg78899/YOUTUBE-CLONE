@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./_header.scss";
 
 import { FaBars } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdNotifications, MdApps } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header({ handleToggleSidebar }) {
   const history = useHistory();
+  const { user } = useSelector((state) => state.auth);
 
   const [input, setInput] = useState("");
 
@@ -50,7 +52,7 @@ export default function Header({ handleToggleSidebar }) {
       <div className="header__icons">
         <MdNotifications size={28} />
         <MdApps size={28} />
-        <img src="/avartar.png" alt="avartar" />
+        <img src={user.photoURL} alt="avartar" />
       </div>
     </div>
   );
