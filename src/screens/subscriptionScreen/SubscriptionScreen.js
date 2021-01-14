@@ -5,14 +5,14 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useDispatch, useSelector } from "react-redux";
 import VideoHorizontal from "../../components/videoHorizontal/VideoHorizontal";
 
-import { getVideoByChannel } from "../../redux/actions/video.action";
+import { getsubscribedChannel } from "../../redux/actions/video.action";
 import "./_subscription.scss";
 
 function SubscriptionScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getVideoByChannel());
+    dispatch(getsubscribedChannel());
   }, [dispatch]);
 
   const { videos, loading } = useSelector((state) => state.subscriptionChannel);

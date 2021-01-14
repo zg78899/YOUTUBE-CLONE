@@ -8,7 +8,7 @@ import numeral from "numeral";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useHistory } from "react-router-dom";
 
-export default function Video({ video }) {
+export default function Video({ video, channelScreen }) {
   const history = useHistory();
   const {
     id,
@@ -19,6 +19,7 @@ export default function Video({ video }) {
       publishedAt,
       thumbnails: { medium },
     },
+    contentDetails,
   } = video;
 
   const [views, setViews] = useState(null);
@@ -29,7 +30,7 @@ export default function Video({ video }) {
   const _duration = moment.utc(seconds * 1000).format("mm:ss");
 
   //video의 id가 object인 경우에 videoId 아님 id;
-  const _videoId = id?.videoId || id;
+  const _videoId = id?.videoId || contentDetails?.videoId || id;
 
   useEffect(() => {
     const get_video_details = async () => {
@@ -85,9 +86,12 @@ export default function Video({ video }) {
         />
         {title}
       </div>
-      <div className="video__channel">
-        <p>{channelTitle}</p>
-      </div>
+      {!channelScreen && (
+        <div className="video__channel">
+          <p>{channelTitle}</p>
+        </div>
+      )}
+
       <div className="video__details">
         <span>
           <AiFillEye /> {numeral(views).format("0.a")} Views •

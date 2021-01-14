@@ -28,8 +28,8 @@ function VideoHorizontal({ video, searchScreen, subScreen }) {
       description,
       publishedAt,
       thumbnails: { medium },
+      resourceId,
     },
-    resourceId,
   } = video;
 
   const isVideo = !(id.kind === "youtube#channel" || subScreen);

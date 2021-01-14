@@ -9,6 +9,8 @@ import { commentListReducer } from "./reducers/comments.reducer";
 import { relatedVideoReducer } from "./reducers/videos.reducer";
 import { searchVideoReducer } from "./reducers/videos.reducer";
 import { subscriptionChannelReducer } from "./reducers/videos.reducer";
+import { channelVideosReducer } from "./reducers/videos.reducer";
+
 // const initialState = {
 //   name:'Sumit',
 //   age:21
@@ -22,6 +24,7 @@ const rootReducer = combineReducers({
   relatedVideos: relatedVideoReducer,
   searchVideos: searchVideoReducer,
   subscriptionChannel: subscriptionChannelReducer,
+  channelVideos: channelVideosReducer,
 });
 
 // const reducer = (initialState) => initialState;

@@ -32,39 +32,39 @@ export default function Sidebar({ sidebar, handleToggleSidebar }) {
         type="light"
         effect="float"
       />
-      <li data-tip="Home" onClick={() => history.push("/")}>
+      <li data-tip="홈" onClick={() => history.push("/")}>
         <MdHome size={23} />
         <span>Home</span>
       </li>
       <Link to="/feed/subscriptions">
-        <li data-tip="Subscriptions">
+        <li data-tip="구독">
           <MdSubscriptions size={23} />
           <span>Subscriptions</span>
         </li>
       </Link>
-      <li data-tip="Like Videos">
+      <li data-tip="좋아하는 비디오">
         <MdThumbUp size={23} />
         <span>Like Videos</span>
       </li>
 
-      <li data-tip="History ">
+      <li data-tip="기록">
         <MdHistory size={23} />
         <span>History</span>
       </li>
 
-      <li data-tip="Library">
+      <li data-tip="라이브러리">
         <MdLibraryBooks size={23} />
         <span>library</span>
       </li>
 
-      <li data-tip="I Dont Like">
+      <li data-tip="싫어요">
         <MdSentimentDissatisfied size={23} />
         <span>i don't know</span>
       </li>
 
       <hr />
 
-      <li data-tip="Log out" onClick={handleLogout}>
+      <li data-tip="로그아웃" onClick={handleLogout}>
         <MdExitToApp size={23} />
         <span>Log out</span>
       </li>

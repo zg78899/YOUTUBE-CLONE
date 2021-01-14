@@ -14,6 +14,9 @@ import {
   SUBSCRIPTIONS_CHANNEL_REQUEST,
   SUBSCRIPTIONS_CHANNEL_SUCCESS,
   SUBSCRIPTIONS_CHANNEL_FAIL,
+  CHANNEL_VIDEOS_REQUEST,
+  CHANNEL_VIDEOS_SUCCESS,
+  CHANNEL_VIDEOS_FAIL,
 } from "../actionType";
 import request from "../../axios";
 
@@ -175,12 +178,11 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
 };
 
 //get subscriptionChannel video
-export const getVideoByChannel = () => async (dispatch, getState) => {
-  dispatch({
-    type: SUBSCRIPTIONS_CHANNEL_REQUEST,
-  });
-
+export const getsubscribedChannel = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: SUBSCRIPTIONS_CHANNEL_REQUEST,
+    });
     const { data } = await request("/subscriptions", {
       params: {
         part: "snippet,contentDetails",
@@ -200,6 +202,46 @@ export const getVideoByChannel = () => async (dispatch, getState) => {
     console.log(error.message);
     dispatch({
       type: SUBSCRIPTIONS_CHANNEL_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const getVideosByChannel = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: CHANNEL_VIDEOS_REQUEST,
+    });
+
+    //1. get upload playlist id
+    const {
+      data: { items },
+    } = await request("/channels", {
+      params: {
+        part: "contentDetails",
+        id: id,
+      },
+    });
+
+    const uploadPlaylistId = items[0].contentDetails.relatedPlaylists.uploads;
+
+    //2.get the video using the id
+    const { data } = await request("/playlistItems", {
+      params: {
+        part: "snippet,contentDetails",
+        playlistId: uploadPlaylistId,
+        maxResults: 30,
+      },
+    });
+    console.log("items", items);
+    dispatch({
+      type: CHANNEL_VIDEOS_SUCCESS,
+      payload: data.items,
+    });
+  } catch (error) {
+    console.log(error.message);
+    dispatch({
+      type: CHANNEL_VIDEOS_FAIL,
       payload: error.message,
     });
   }
