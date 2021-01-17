@@ -4,7 +4,10 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Video from "../../components/video/Video";
-import { getChannelDetails } from "../../redux/actions/channel.action";
+import {
+  checkSubscriptionStatus,
+  getChannelDetails,
+} from "../../redux/actions/channel.action";
 import { getVideosByChannel } from "../../redux/actions/video.action";
 import numeral from "numeral";
 import "./_channelScreen.scss";
@@ -17,6 +20,7 @@ function ChannelScreen() {
   useEffect(() => {
     dispatch(getVideosByChannel(channelId));
     dispatch(getChannelDetails(channelId));
+    dispatch(checkSubscriptionStatus(channelId));
   }, [dispatch, channelId]);
 
   //채널 비디오
@@ -30,6 +34,7 @@ function ChannelScreen() {
   const subscriptionStatus = useSelector(
     (state) => state.channelDetails.subscriptionStatus
   );
+  console.log("subscriptionStatus", subscriptionStatus);
 
   return (
     <Fragment>
