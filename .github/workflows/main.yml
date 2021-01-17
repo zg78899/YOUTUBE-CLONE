@@ -16,7 +16,8 @@ jobs:
 
       - name: install node
         uses: actions/setup-node@v2
-        with: node-version:'12'
+        with:
+          node-version: "12"
 
       - name: install node packages
         run: npm i
