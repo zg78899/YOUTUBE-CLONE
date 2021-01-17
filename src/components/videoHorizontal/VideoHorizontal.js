@@ -6,12 +6,12 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { AiFillEye } from "react-icons/ai";
 // import request from "../../axios";s
 import { Col, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { getRelatedVideoId } from "../../redux/actions/video.action";
-import { channelDetailReducer } from "../../redux/reducers/channel.reducer";
+// import { useDispatch } from "react-redux";
+// import { getRelatedVideoId } from "../../redux/actions/video.action";
+// import { channelDetailReducer } from "../../redux/reducers/channel.reducer";
 import request from "../../axios";
 import { useHistory } from "react-router-dom";
-import { MdDescription } from "react-icons/md";
+// import { MdDescription } from "react-icons/md";
 
 //using react-bootstarp
 function VideoHorizontal({ video, searchScreen, subScreen }) {

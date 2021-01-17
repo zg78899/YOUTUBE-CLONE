@@ -222,7 +222,6 @@ export const getVideosByChannel = (id) => async (dispatch) => {
         id: id,
       },
     });
-
     const uploadPlaylistId = items[0].contentDetails.relatedPlaylists.uploads;
 
     //2.get the video using the id
@@ -230,7 +229,7 @@ export const getVideosByChannel = (id) => async (dispatch) => {
       params: {
         part: "snippet,contentDetails",
         playlistId: uploadPlaylistId,
-        maxResults: 30,
+        maxResults: 50,
       },
     });
     console.log("items", items);

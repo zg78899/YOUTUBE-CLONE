@@ -32,6 +32,7 @@ export default function Video({ video, channelScreen }) {
   //video의 id가 object인 경우에 videoId 아님 id;
   const _videoId = id?.videoId || contentDetails?.videoId || id;
 
+  //비디오 디테일
   useEffect(() => {
     const get_video_details = async () => {
       const {
@@ -49,6 +50,7 @@ export default function Video({ video, channelScreen }) {
     get_video_details();
   }, [_videoId]);
 
+  //채널 아이콘
   useEffect(() => {
     const get_channel_icon = async () => {
       const {

@@ -5,7 +5,6 @@ import VideoHorizontal from "../../components/videoHorizontal/VideoHorizontal";
 import VideoMetaData from "../../components/videoMetaData/VideoMetaData";
 import "./watchScreen.scss";
 
-import { v4 as uuidv4 } from "uuid";
 import Comments from "../../components/comments/Comments";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
